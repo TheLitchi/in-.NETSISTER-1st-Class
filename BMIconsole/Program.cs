@@ -15,26 +15,32 @@ namespace BMIconsole
             string inputHeight = Console.ReadLine();
             Console.WriteLine("請輸入體重 (公斤) :");
             string inputWeight = Console.ReadLine();
+            Console.WriteLine("你是公的嗎?(請輸入y/n)");
+            String genderIdent = Console.ReadLine();
 
-            //double height = 0.0d;
+            BMIService.IBodyMeasureIndex bmiService = null;
+            bmiService = new BMIService.WomenBodyMeasureIndex();
+            double bmi = 0.0d;
 
-            //if (!double.TryParse(inputHeight, out height ))
-            //{
 
+            bool isMale = true;
+            isMale = (genderIdent == "y");
+
+            if (isMale)
+                bmiService = new MenBodyMeasureIndex();
+            else
+                bmiService = new WomenBodyMeasureIndex();
             
 
             double height = double.Parse(inputHeight);
             double weight = double.Parse(inputWeight);
 
-            BMIService.IBodyMeasureIndex bmiService = null;
-            bmiService = new BMIService.WomenBodyMeasureIndex();
-            double bmi = 0.0d;
+           
             MeasureResult result = bmiService.caculute(height, weight, out bmi);
 
             Console.WriteLine(bmi);
 
-            //Console.WriteLine("結果是");
-            
+                      
             switch(result)
             {
                 case MeasureResult.Less :
@@ -46,7 +52,7 @@ namespace BMIconsole
                     break;
 
                 case MeasureResult.More:
-                    Console.WriteLine("太胖");
+                    Console.WriteLine("尼太胖！！！");
                     break;
             }
 
