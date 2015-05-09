@@ -30,6 +30,7 @@ namespace BMIconsole
 
             //Console.WriteLine("結果是");
             
+
             
 
             if (bmi < 18)
